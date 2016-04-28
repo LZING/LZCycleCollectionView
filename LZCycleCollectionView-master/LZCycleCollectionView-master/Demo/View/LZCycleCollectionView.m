@@ -36,6 +36,13 @@ static NSString * const resuableID = @"cell";
     return self;
 }
 
+- (void)dealloc {
+    if (self.timer) {
+        self.timer = nil;
+        [self.timer invalidate];
+    }
+}
+
 - (instancetype)initWithFrame:(CGRect)frame {
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
     self.flowLayout = flowLayout;
@@ -145,7 +152,11 @@ static NSString * const resuableID = @"cell";
     }
     
     NSInteger index = (self.currentIndex + self.imageArr.count - 1 + indexPath.item) % (self.imageArr.count);
+    if ([self.cycleDelegate respondsToSelector:@selector(cycleCollectionView:didScrollItemAtIndex:)]) {
+        [self.cycleDelegate cycleCollectionView:self didScrollItemAtIndex:index];
+    }
     cell.imagePath = self.imageArr[index];
+    
     return cell;
 }
 

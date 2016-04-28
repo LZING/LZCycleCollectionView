@@ -41,7 +41,7 @@
             UIImage *image = [UIImage imageWithContentsOfFile:imagePath];
 //            UIImage *image = [UIImage imageNamed:imagePath];
             if (image == nil) {
-                [UIImage imageNamed:imagePath];
+                image = [UIImage imageNamed:imagePath];
 //                [UIImage imageWithContentsOfFile:imagePath];
             }
             self.imageView.image = image;

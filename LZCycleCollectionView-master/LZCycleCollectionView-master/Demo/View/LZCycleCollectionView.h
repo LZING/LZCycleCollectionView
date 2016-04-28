@@ -16,6 +16,9 @@
 ///  点击图片回调
 - (void)cycleCollectionView:(LZCycleCollectionView *)cycleCollectionView didSelectItemAtIndex:(NSInteger)index;
 
+///  滚动图片回调
+- (void)cycleCollectionView:(LZCycleCollectionView *)cycleCollectionView didScrollItemAtIndex:(NSInteger)index;
+
 @end
 
 @interface LZCycleCollectionView : UICollectionView

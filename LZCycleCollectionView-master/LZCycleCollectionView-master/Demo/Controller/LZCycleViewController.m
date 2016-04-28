@@ -15,26 +15,36 @@
 
 @property (nonatomic, strong) LZCycleCollectionView *cycleCV;
 
+@property (nonatomic, strong) UIPageControl *pageControl;
+
 @end
 
 @implementation LZCycleViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.view.backgroundColor = [UIColor whiteColor];
     
     [self.view addSubview:self.cycleCV];
+    self.cycleCV.frame = CGRectMake(0, 0, 300, 300);
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    self.cycleCV.frame = self.view.bounds;
-//    self.cycleCV.frame = CGRectMake(0, 0, 300, 300);
+    
+    self.pageControl.frame = CGRectMake(0, CGRectGetMaxY(self.cycleCV.frame) - 50, CGRectGetWidth(self.cycleCV.frame), 50);
+    [self.view addSubview:self.pageControl];
 }
 
 #pragma mark - LZCycleCollectionViewDelegate
 ///  点击了cycleCollectionView
 - (void)cycleCollectionView:(LZCycleCollectionView *)cycleCollectionView didSelectItemAtIndex:(NSInteger)index {
     NSLog(@"%ld", index);
+}
+
+///  滚动了cycleCollectionView
+- (void)cycleCollectionView:(LZCycleCollectionView *)cycleCollectionView didScrollItemAtIndex:(NSInteger)index {
+    self.pageControl.currentPage = index;
 }
 
 #pragma mark - lazy
@@ -92,6 +102,14 @@
         _cycleCV.cycleDelegate = self;
     }
     return _cycleCV;
+}
+
+- (UIPageControl *)pageControl {
+    if (_pageControl == nil) {
+        _pageControl = [[UIPageControl alloc] init];
+        _pageControl.numberOfPages = self.img.count;
+    }
+    return _pageControl;
 }
 
 @end
