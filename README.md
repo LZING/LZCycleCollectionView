@@ -20,6 +20,10 @@
      或者
      cycleCV = [[LZCycleCollectionView alloc] initWithImageArr:self.img];
      
+     // 当然需要添加pageControl的话还需要再加两句
+     self.pageControl.frame = CGRectMake(0, CGRectGetMaxY(self.cycleCV.frame) - 50, CGRectGetWidth(self.cycleCV.frame), 50);
+    [self.view addSubview:self.pageControl];
+     
      #高级点的功能呢有设置滚动时间(默认2.0s)
      cycleCV.timeInterval = 1;
     
@@ -28,3 +32,6 @@
      
      ///  点击了cycleCollectionView
      - (void)cycleCollectionView:(LZCycleCollectionView *)cycleCollectionView didSelectItemAtIndex:(NSInteger)index
+     
+     ///  滚动了cycleCollectionView,返回pageContol的当前数目
+     - (void)cycleCollectionView:(LZCycleCollectionView *)cycleCollectionView didScrollItemAtIndex:(NSInteger)index
